@@ -1,5 +1,5 @@
-local user_id = "3485422903"
-local game_id = "6361937392"
+local user_id = ""
+local game_id = ""
 
 local http_service = game:GetService("HttpService")
 
