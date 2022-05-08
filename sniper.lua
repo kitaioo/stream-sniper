@@ -17,10 +17,7 @@ local function get_servers()
         })
         data = http_service:JSONDecode(data.Body)
         for _, server in pairs(data.data) do
-            servers[#servers + 1] = {
-                server_id = server.id,
-                player_tokens = server.playerTokens
-            }
+            table.insert(servers, server)
         end
         if not data.nextPageCursor then
             break
@@ -35,9 +32,9 @@ local servers = get_servers()
 rconsoleprint("found " .. #servers .. " servers\n")
 for _, server in pairs(servers) do
     local server_data = {}
-    for i = 1, #server.player_tokens do
+    for i = 1, #server.playerTokens do
         table.insert(server_data, {
-            token = server.player_tokens[i],
+            token = server.playerTokens[i],
             type = "AvatarHeadshot",
             size = "150x150"
         })
@@ -50,10 +47,10 @@ for _, server in pairs(servers) do
             ["Content-Type"] = "application/json"
         }
     })
-    rconsoleprint("searching server " .. server.server_id .. "\n")
+    rconsoleprint("searching server " .. server.id .. "\n")
     for _, v in next, http_service:JSONDecode(post_request.Body).data do
         if v.imageUrl == image_url then
-            game:GetService("TeleportService"):TeleportToPlaceInstance(game_id, server.server_id)
+            game:GetService("TeleportService"):TeleportToPlaceInstance(game_id, server.id)
         end
     end
 end
