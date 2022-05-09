@@ -46,7 +46,9 @@ while true do
             if not post_data then
                 return
             end
-            rconsoleprint("searching server " .. post_data[index].requestId .. "\n")
+            if post_data[index] then
+                rconsoleprint("searching server " .. post_data[index].requestId .. "\n")
+            end
             for _, v in next, post_data do
                 if v.imageUrl == image_url then
                     warn("found server " .. v.requestId .. " in " .. math.floor(tick() - start_tick) .. " seconds\n")
