@@ -17,15 +17,15 @@ while true do
     })
     data = http_service:JSONDecode(data.Body)
     for _, server in pairs(data.data) do
+        local server_data = {}
+        for i = 1, #server.playerTokens do
+            table.insert(server_data, {
+                token = server.playerTokens[i],
+                type = "AvatarHeadshot",
+                size = "150x150"
+            })
+        end
         task.spawn(function()
-            local server_data = {}
-            for i = 1, #server.playerTokens do
-                table.insert(server_data, {
-                    token = server.playerTokens[i],
-                    type = "AvatarHeadshot",
-                    size = "150x150"
-                })
-            end
             local post_request = syn.request({
                 Url = "https://thumbnails.roblox.com/v1/batch",
                 Method = "POST",
