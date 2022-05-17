@@ -1,4 +1,4 @@
-local user_id = "3485422903"
+local user_id = "285402025"
 local game_id = tostring(game.PlaceId)
 
 local start_tick = tick()
@@ -19,9 +19,6 @@ while true do
     })
     data = http_service:JSONDecode(data.Body)
     index = index + 1
-    if not data.nextPageCursor then
-        break
-    end
     cursor = data.nextPageCursor
     task.spawn(function()
         for _, server in pairs(data.data) do
