@@ -1,4 +1,4 @@
-local user_id = "285402025"
+local user_id = "140258990"
 local game_id = tostring(game.PlaceId)
 
 local start_tick = tick()
